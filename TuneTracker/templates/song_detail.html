@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% block css_style %}
+<style>
+  body{
+    background-image : linear-gradient(rgba(225,225,225, 0.8), rgba(225,225,225, 0.8)), url({% static 'peakpx.jpg' %});
+    backdrop-filter: blur(10px);
+    background-size:cover;
+  }
+  .card{
+    background-image : linear-gradient(rgba(255,255,255, .1), rgba(0, 0, 0, 1)), url({{song.album_cover.url}});
+    background-size : cover;
+    border-radius : 2rem;
+    margin-top:8%;
+    margin-left:35%;
+    width :30%;
+    height :30em;
+    position:relative;
+    {% comment %} filter:blur(8px);
+    -webkit-filter: blur(8px); {% endcomment %}
+
+  }
+  .content{
+    {% comment %} margin-bottom:0%; {% endcomment %}
+    padding-left:2rem;
+    position:absolute;
+    bottom:0;
+  }
+
+.zoom{
+    transition: transform .6s;     
+}
+.zoom:hover {
+    transform: scale(1.1);
+    {% comment %} box-shadow: 30px 30px 25px rgb(138, 117, 143,0.25); {% endcomment %}
+        }
+</style>
+
+
+
+{%endblock%}
+
+{% block content %}
+
+  <div class="card zoom">
+    <div class="content zoom">
+      <h1 style="color:white">{{song.title}}</h1>
+      <h3 style="color:white">-by : {{ song.artist }}</h3>
+    </div>
+  </div>
+  
+
+{% endblock %}

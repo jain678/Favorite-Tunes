@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css_style %}
+<style>
+    .container{
+        display:block;
+        margin:auto;
+        width:35%;
+        border-radius: 2rem;
+        backdrop-filter: blur(100px);
+        padding:1rem;
+        background-image:linear-gradient(rgba(0,0,200, 0.2), rgba(225,225,225, 0.2));
+        margin-top:3rem;
+        height:20rem;
+        overflow:auto;
+    }
+    .container::-webkit-scrollbar {
+        display: none;
+      }
+    .form-field{
+        color:red;
+    }
+    .zoom{
+        transition: transform .6s;     
+    }
+    .zoom:hover {
+        transform: scale(1.1);
+        box-shadow: 30px 30px 25px rgb(138, 117, 143,0.25);
+            }
+    
+    .btn{
+      background-color:rgb(138, 88, 252);
+      color:rgba(220,220,220,1);
+      border-radius:2rem;
+      border:2rem;
+      margin-left:1rem;
+      height :2rem;
+      padding:0.5rem;
+      text-decoration:none;
+    }
+</style>
+{%endblock%}
+{% block content %}
+
+<form action="{% url 'add_artist' %}" class="container" enctype = "multipart/form-data" method="POST">
+    <h1 style="text-align:center">Add Artist</h1>
+    {% csrf_token %}
+    {{form.as_p}}
+
+    <button class="btn zoom" type = 'submit'> Add Artist </button>
+</form>
+{% endblock %}

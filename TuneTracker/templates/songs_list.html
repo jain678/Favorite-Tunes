@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_style %}
+<style>
+  body{
+    background-image : linear-gradient(rgba(225,225,225, 0.8), rgba(225,225,225, 0.8)), url({% static 'peakpx.jpg' %});
+    
+    {% comment %} background-size:cover; {% endcomment %}
+  }
+  .container{
+    display:block;
+    margin:auto;
+    width:35%;
+    border-radius: 2rem;
+    backdrop-filter: blur(100px);
+    padding:1rem;
+    background-image:linear-gradient(rgba(0,0,200, 0.2), rgba(225,225,225, 0.2));
+    margin-top:3rem;
+    height:37rem;
+    overflow:auto;
+}
+
+  .card{
+    
+    background-color : rgba(0,0,0,0.2);
+    display : block;
+    border-radius : 2rem;
+  
+    margin:1rem;
+    backdrop-filter: blur(10px);
+
+  }
+  .content{
+    display : inline-flex;
+    text-align:center;
+
+  }
+  .image{
+    padding : 1rem;
+    border-radius :2rem;
+    height:4rem;
+    width:4rem;
+  }
+  h1{
+    color:rgba(50,50,50,1);
+  }
+
+
+.btn{
+  background-color:rgb(135, 120, 148);
+  color:rgba(220,220,220,1);
+  border-radius:2rem;
+  border:2rem;
+  margin-left:1rem;
+  height :2rem;
+  padding:0.5rem;
+  text-decoration:none;
+}
+.btn2{
+  background-color:rgb(99, 104, 125);
+}
+.zoom{
+  transition: transform .6s;     
+}
+.zoom:hover {
+  transform: scale(1.1);
+  box-shadow: 30px 30px 25px rgb(138, 117, 143,0.25);
+        }
+</style>
+
+
+
+{%endblock%}
+
+
+
+
+{% block content %}
+
+
+<div class="container zoom">
+  <h1 style="text-align:center">Tracks</h1>
+  <a class="btn zoom" href="{% url 'add_song' %}"><b>Add Track<a></a>
+  <a class="btn zoom" href="{% url 'add_artist' %}"><b>Add Artist<a></a>
+  <a class="btn zoom btn2" href="{% url 'songs_list' %}"><b>Tracks<a></a>
+  <a class="btn zoom btn2" href="{% url 'artists_list' %}"><b>Artists<a></a>
+{% for song in songs %}
+  <div class="card zoom">
+    <div class="content">
+      {% comment %} <div class="image"> {% endcomment %}
+      {% if song.album_cover %}
+        <img src="{{song.album_cover.url}}" class="image" alt="hello">
+      {% endif %}
+      {% comment %} </div> {% endcomment %}
+      <a style="text-decoration:none;" href="{% url 'song_detail' song.id %}"><h1>{{ song.title }}</h1></a>
+      
+    </div>
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}
